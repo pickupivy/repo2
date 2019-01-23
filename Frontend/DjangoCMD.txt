@@ -1,0 +1,19 @@
+
+mkdir <filename>
+python -m venv <virtual environment filename>/<envname>
+<envname>\Scripts\activate.bat
+pip install Django	
+<envname>\Scripts\django-admin.exe startproject <project name>/<prjname> .
+//after that, you will see manage.py and <prjname>file
+python manage.py migrate
+python manage.py runserver
+python manage.py startapp <appname>
+//insert DIY models to <appname>/models.py, and add it to <prjname>/settings.py
+python manage.py makemigrations <appname> //just make datafile for migrations
+python manage.py migrate
+python manage.py createsuperuser
+//define model in models.py, add it to settings.py and then makemigrations <appname> 
+//then register the model in admin.py
+from <appname>.<modelfile> import <modelname>
+admin.site.register(<modelname>)
+

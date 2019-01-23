@@ -1,0 +1,39 @@
+WXSS(WeiXin Style Sheets)是一套样式语言，用于描述 WXML 的组件样式。
+
+WXSS 用来决定 WXML 的组件应该怎么显示。
+
+为了适应广大的前端开发者，WXSS 具有 CSS 大部分特性。同时为了更适合开发微信小程序，WXSS 对 CSS 进行了扩充以及修改。
+
+与 CSS 相比，WXSS 扩展的特性有：
+
+尺寸单位
+样式导入
+
+index.json 或者说所有文件，空的文件需要添加花括号{}
+display=table-cell时，设置margin属性可能会不生效，因此拆分成父子元素；
+
+display: table-cell 作为表格单元格显示，如此一来，
+vertical-align:middle  属性起作用了。去掉display可就不行了哦！！
+
+audio控件不工作的原因可能是src源不让访问了，好像有效期是一天；
+也有可能是view外壳的属性导致其不能播放，比如margin-top。
+所以应用类控件尽量少使用view属性去渲染，view属性尽量放在外壳去使用。
+
+margin-top属性会影响audio控件的点击位置
+
+var pageObject = {
+	...
+}
+Page(pageObject)
+
+js里面都是键值对，键值对不能有等号！
+Page注册似乎是只调用一次！
+函数不能直接访问数据。要通过this.data.来访问！this指代的应该是pageobject.
+
+**重要的 var that=this **
+原来我们忘记了javascript 语言中 this关键字的用法了。在javascript语言中，this代表着当前的对象，它在程序中随着执行的上下文随时会变化。在本例中回调函数对象相对于showactionsheet点击事件函数对象已经发生了变化。所以已经不是原来的页面对象了。自然就没有了data属性，也没有了data.itemLists属性了。解决的办法就是复制一份当前的对象。所以我们有了这个重要的语句：
+
+var that=this;//把this对象复制到临时变量that.
+这时候我们使用that 就不会找不到原来的对象了。
+console.log(that.data.itemLists[res.tapIndex]);//使用that.data 属性
+
