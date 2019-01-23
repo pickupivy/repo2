@@ -1,0 +1,24 @@
+
+1.查看pip
+（1）直接在cmd窗口中输入pip命令，会显示pip所有的参数使用方法；
+（2）输入pip提示Did not provide a command，则有两种可能，第一是没有配置环境变量，第二就是其他应用程序也存在pip的环境变量
+如果是第二种情况，比如有三个pip，所以直接输入pip系统无法识别是其中某个，这时候就可以用where pip来查询。
+
+用pip -V可以查看版本，是大写的V；
+pip版本升级命令：pip install --upgrade pip
+pip list 查看已经安装的第三方库
+pip list --outdated：可以查看有新版本的第三方库，可显示现在安装的版本，以及最新的版本
+
+pip install <库名>
+pip安装会拉取最新版本安装，想安装任意版本则可加上版本号
+pip install <库名>=<版本号>
+
+查看安装库的详细信息，命令：pip show <库名>
+
+卸载第三方库 命令：pip uninstall <库名>
+
+卸载pip的命令：python -m pip uninstall pip；也可以直接把pip文件夹删了；建议使用命令后把遗留的文件删除即可。
+
+https://www.lfd.uci.edu/~gohlke/pythonlibs/ python库
+
+
