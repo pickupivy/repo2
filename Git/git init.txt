@@ -1,0 +1,40 @@
+
+About SSH
+Using the SSH protocol, you can connect and authenticate to remote servers and services. With SSH keys, you can connect to GitHub without supplying your username or password at each visit.
+
+Checking for existing SSH keys
+Before you generate an SSH key, you can check to see if you have any existing SSH keys.
+
+Generating a new SSH key and adding it to the ssh-agent
+After you've checked for existing SSH keys, you can generate a new SSH key to use for authentication, then add it to the ssh-agent.
+If you don't already have an SSH key, you must generate a new SSH key. If you're unsure whether you already have an SSH key, check for existing keys.
+If you don't want to reenter your passphrase every time you use your SSH key, you can add your key to the SSH agent, which manages your SSH keys and remembers your passphrase.
+Generating a new SSH key:
+1.Open Git Bash.
+2.Paste the text below, substituting in your GitHub email address.
+$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+3.When you're prompted to "Enter a file in which to save the key," choose the file location.
+Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):[Press enter]
+4.At the prompt, type a secure passphrase. You can also skip this step and just press enter.
+Enter passphrase (empty for no passphrase): [Type a passphrase]
+Enter same passphrase again: [Type passphrase again]
+
+Adding a new SSH key to your GitHub account
+To configure your GitHub account to use your new (or existing) SSH key, you'll also need to add it to your GitHub account.
+1.Ensure the ssh-agent is running:
+$ eval $(ssh-agent -s)
+Agent pid 59566
+2.Add your SSH private key to the ssh-agent.If you created your key with a different name, or if you are adding an existing key that has a different name, replace id_rsa in the command with the name of your private key file.
+$ ssh-add ~/.ssh/id_rsa 
+3.Add the SSH key to your GitHub account. //Remember! One computer has a different SSH key from another computer.
+
+Testing your SSH connection
+After you've set up your SSH key and added it to your GitHub account, you can test your connection.
+1.Open Git Bash.
+2.Enter the following:	# Attempts to ssh to GitHub
+$ ssh -T git@github.com
+
+
+Working with SSH key passphrases
+You can secure your SSH keys and configure an authentication agent so that you won't have to reenter your passphrase every time you use your SSH keys.
+

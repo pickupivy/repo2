@@ -1,0 +1,13 @@
+不是C语言里的，是C51里的(单片机的C扩展的)
+bit位标量是C51编译器的一种扩充数据类型，利用它可定义一个位标量，但不能定义位指针，也不能定义位数组。它的值是一个二进制位，不是0就是1，类似一些高级语言中的Boolean类型中的True和False。
+bit 是变量类型，相当于boot 只占一个位，最多可定128个bit变量
+sbit 是给可位寻址的变量(或特殊功能寄存器)的某一个位定个别名，不另占空间
+如:
+bit YesOrNo; //定义bit型变量 占用bdata区的一个位
+sbit P0_1 = P0^1; //申明一个引用名 P0_1 指向端口P0的1号接脚，不会额外分配空间
+
+c语言中1<<n是1先转成二进制，再左移n位，然后补0
+
+#define XBYTE ((unsigned char volatile xdata *) 0)
+定义        XBYTE 为 指向 xdata 地址空间unsigned char 数据类型的指针，指针值为0
+这样，可以直接用XBYTE[0xnnnn]或*(XBYTE+0xnnnn)访问外部RAM了。

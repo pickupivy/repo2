@@ -1,0 +1,6 @@
+
+#dd if=/dev/sda1 of=./sda1.img
+
+#dd if=/dev/sda1 | gzip -9 > ./sda1.img
+
+#mount -o loop ./sda1.img /mnt/sda1

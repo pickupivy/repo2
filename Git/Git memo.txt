@@ -1,0 +1,36 @@
+使用Git Bash 创建/添加密钥、创建仓库/克隆等
+1.打开Git Bash
+2.创建密钥：ssh-keygen -t rsa -b 4096 -C "your_email@example.com"	可以看到如下：
+Generating public/private rsa key pair.
+Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):[Press enter]	
+//若直接回车则存储在默认路径，也可以自定义存储路径和key名称
+接着弹出提示是否设置密码，这里一般直接回车不设置密码。
+Enter passphrase (empty for no passphrase): [Type a passphrase]
+Enter same passphrase again: [Type passphrase again]
+
+在存储路径下可以看到新生成的2个文件:id_rsa & id_rsa.pub. 其中带.pub后缀的是公钥，不带后缀的是私钥。
+
+3.本地添加密钥：ssh-add /c/Users/you/.ssh/id_rsa  //这里添加的是私钥id_rsa
+在此之前需要输入：eval $(ssh-agent -s)  运行ssh客户端/确认ssh客户端是否在运行
+远程仓库添加密钥：网站都有添加SSH key的窗口，需要注意的是这里添加的是公钥id_rsa.pub，将其中的内容复制进网站。
+
+4.测试SSH连接权限是否打开：以github为例，输入：ssh -T git@github.com
+
+连接拒绝情况：
+The authenticity of host 'github.com (IP ADDRESS)' can't be established.
+RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+Are you sure you want to continue connecting (yes/no)?
+连接成功的情况：
+Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+
+ps:如果你在本地添加的是公钥而不是私钥，就会被远程端拒绝：Permission denied (publickey).
+
+5.创建仓库: git init; git remote add <remote> <url>; 这里<remote>为你对远程仓库的命名。
+例如 git remote add origin git@github.com:pickupivy/Myrepo.git
+(这里的url是没有带ssh://前缀的，可能不同网站情况不一样。)
+git remote -v 查看远程仓库的信息，可以看到：
+origin  git@github.com:pickupivy/Myrepo.git (fetch)
+origin  git@github.com:pickupivy/Myrepo.git (push)
+那么接下来就可以进行常规操作：fetch, commit, push, pull等；
+对于创建的空仓库并fetch的远程后，是没有本地分支的，需要手动去切换一下。(并不会自动切到master)
+

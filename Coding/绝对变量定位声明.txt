@@ -1,0 +1,12 @@
+在C 程序中用_at_关键词变量可以定位在绝对存储地址用法如下
+type [memory_space] variable_name _at_ constant
+
+struct link list idata _at_ 0x40; /* list at idata 0x40 */
+char xdata text[256] _at_ 0xE000; /* array at xdata 0xE000 */
+int xdata i1 _at_ 0x8000; /* int at xdata 0x8000 */
+
+象通用指针一样可以指定一个指定存储区指针的保存存储区在指针声明前加
+一个存储类型标识符例如
+char data * xdata str; /* ptr in xdata to data char */
+int xdata * data numtab; /* ptr in data to xdata int */
+long code * idata powtab; /* ptr in idata to code long */
