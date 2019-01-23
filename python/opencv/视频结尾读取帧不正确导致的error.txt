@@ -1,0 +1,43 @@
+title: opencv报错
+
+版本python3.7
+以下这段代码来自opencv官网上视频处理的教程：
+
+import numpy as np
+import cv2 as cv
+cap = cv.VideoCapture('vtest.avi')
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    #gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    cv.imshow('frame',frame)
+    if cv.waitKey(1) & 0xFF == ord('q'):
+        break
+cap.release()
+cv.destroyAllWindows()
+
+运行之后出现如下错误：
+cv2.error: OpenCV(4.0.1) D:\Build\OpenCV\opencv-4.0.1\modules\highgui\src\window.cpp:360: error: (-215:Assertion failed) size.width>0 && size.height>0 in function 'cv::imshow'
+网上找了一圈答案找不着，让我疑惑的是视频仍然可以正常播放，播放完之后才报这个错误。于是在播放时按下'q'键，发现不会报错。
+于是怀疑可能时视频末尾读取帧不正确导致的，仔细阅读了下教程，有一句原话：
+cap.read() returns a bool (True/False). If frame is read correctly, it will be True. 
+So you can check end of the video by checking this return value.
+于是在显示图像前面加了一个判断，变为：
+	if ret == True:
+		cv.imshow('frame',frame)
+	else:
+		break
+就不会报错了。
+这个地方在调用cap.release()之前cap.isOpened()一直为真，会一直循环执行读取图片和等待直到按下'q'键才退出，画面停留在最后一帧。
+所以加了一个else:break，当视频结束后及时退出窗口，减少资源浪费。
+
+如果希望视频播放后不关闭窗口且停留在最后一帧的画面，可以这么写：
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    if ret == True:
+		cv.imshow('frame',frame)
+	else:
+		cap.release()
+		cv2.waitKey(0)
+    if cv.waitKey(1) & 0xFF == ord('q'):
+        break
+这样循环就停在了cv2.waitKey(0)这一步，直到你手动关掉窗口为止。
