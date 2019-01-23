@@ -1,0 +1,14 @@
+
+在CMD窗口下将远程的共享文件夹映射为本地的Y盘：
+net use y: \\172.29.17.1\pc "<password>" /user:RSDOMAIN\<username>
+net use y: \\172.29.17.1\pc "<password>" /user:<username>
+<>符号为修饰符, 例：
+net use y: \\172.29.17.1\pc "abc123" /user:Tony
+注意y:后面必须有一个空格
+
+net user ------------查看有哪些用户
+net start -----------查看开启了哪些服务
+net start <服务名> --开启服务
+net stop <服务名> ---停止某服务
+
+

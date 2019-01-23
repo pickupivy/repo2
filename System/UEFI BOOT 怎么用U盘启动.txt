@@ -1,0 +1,5 @@
+
+1.将U盘格式化为FAT16/32分区(EFI只能识别FAT16 32)，然后建立efi\microsoft\boot文件夹 复制安装盘BCD放入efi\ BOOT 复制安装盘bootx64.efi 放入sources文件夹，复制安装盘sources文件夹boot.wim放入boot文件夹，复制安装盘 boot.sd。
+2. 下载附件bootmgfw.efi和Shell.efi 放到根目录中。
+3.进入UEFI BIOS，选择UEFI U盘启动，进入PE修复计算机，高级工具 -命令提示符-找到硬盘WIN8安装文件目录进入sources-setup安装(前提是硬盘已转为GPT格式)。
+以上几步，就能够顺利通过UEFI方式来安装和引导Windows 8系统了。

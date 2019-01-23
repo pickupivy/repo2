@@ -1,0 +1,19 @@
+
+此命令创建指定启动项的副本。
+
+bcdedit [/store <filename>] /copy {<id>} /d <description>
+
+    <filename>      指定要使用的存储。如果未指定此选项，则使用系统存储。
+                    有关详细信息，请运行 "bcdedit /? store"。
+
+    <id>            指定要复制的项的标识符。
+                    有关标识符的详细信息，请运行 "bcdedit /? ID"。
+
+    <description>   指定要用于新项的描述。
+
+示例:
+
+下列命令创建指定操作系统启动项的副本:
+
+    bcdedit /copy {cbd971bf-b7b8-4885-951a-fa03044f5d71} /d "Copy of entry"
+
