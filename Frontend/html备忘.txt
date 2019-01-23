@@ -1,0 +1,334 @@
+Hyper Text Mark-up Language
+
+什么是 HTML？
+HTML 是用来描述网页的一种语言。
+HTML 指的是超文本标记语言 (Hyper Text Markup Language)
+HTML 不是一种编程语言，而是一种标记语言 (markup language)
+标记语言是一套标记标签 (markup tag)
+HTML 使用标记标签来描述网页
+
+HTML 标签
+HTML 标记标签通常被称为 HTML 标签 (HTML tag)。
+HTML 标签是由尖括号包围的关键词，比如 <html>
+HTML 标签通常是成对出现的，比如 <b> 和 </b>
+标签对中的第一个标签是开始标签，第二个标签是结束标签
+开始和结束标签也被称为开放标签和闭合标签
+
+HTML 文档 = 网页
+HTML 文档描述网页
+HTML 文档包含 HTML 标签和纯文本
+HTML 文档也被称为网页
+Web 浏览器的作用是读取 HTML 文档，并以网页的形式显示出它们。
+
+HTML 链接是通过 <a> 标签进行定义的。
+<a href="http://www.w3school.com.cn">This is a link</a>
+HTML 图像是通过 <img> 标签进行定义的。
+<img src="w3school.jpg" width="104" height="142" />
+
+<body style="background-color:PowderBlue;">
+
+<p style="font-family:verdana;color:red">
+This text is in Verdana and red</p>
+
+<p style="font-size:30px">This text is 30 pixels high</p>
+
+<h1 style="text-align:center">This is a heading</h1>
+
+<b>	定义粗体文本。
+<big>	定义大号字。
+<em>	定义着重文字。
+<i>	定义斜体字。
+<small>	定义小号字。
+<strong>定义加重语气。
+<sub>	定义下标字。
+<sup>	定义上标字。
+<ins>	定义插入字。
+<del>	定义删除字。
+
+<pre>标签保留了空格和换行，很适合显示计算机代码
+<pre>
+for i = 1 to 10
+     print i
+next i
+</pre>
+
+<abbr>		定义缩写。
+<acronym>	定义首字母缩写。
+<address>	定义地址。
+<bdo>		定义文字方向。
+<blockquote>	定义长的引用。
+<q>		定义短的引用语。
+<cite>		定义引用、引证。
+<dfn>		定义一个定义项目。
+
+<abbr title="etcetera">etc.</abbr>
+<acronym title="World Wide Web">WWW</acronym>
+在某些浏览器中，当您把鼠标移至缩略词语上时，title 可用于展示表达的完整版本。
+使用 blockquote 元素的话，浏览器会插入换行和外边距，而 q 元素不会有任何特殊的呈现。
+
+<p>WWF 的目标是 <q>构建人与自然和谐相处的世界。</q></p> 
+WWF 的目标是“构建人与自然和谐相处的世界。”
+浏览器通常会在 q 元素周围包围引号。
+
+<code> 元素不保留多余的空格和折行：如需解决该问题，您必须在 <pre> 元素中包围代码
+
+<code>	定义计算机代码文本
+<kbd>	定义键盘文本
+<samp>	定义计算机代码示例
+<var>	定义变量
+<pre>	定义预格式化文本
+
+注释标签 <!-- 与 --> 用于在 HTML 插入注释。
+
+当样式需要被应用到很多页面的时候，外部样式表将是理想的选择。使用外部样式表，你就可以通过更改一个文件来改变整个站点的外观。
+当单个文件需要特别样式时，就可以使用内部样式表。你可以在 head 部分通过 <style> 标签定义内部样式表。
+
+<style>	定义样式定义。
+<link>	定义资源引用。
+<div>	定义文档中的节或区域（块级）。
+<span>	定义文档中的行内的小块或区域。
+
+<a href="http://www.w3school.com.cn/" target="_blank">Visit W3School!</a>
+如果把链接的 target 属性设置为 "_blank"，该链接会在新窗口中打开。
+"链接文本" 不必一定是文本。图片或其他 HTML 元素都可以成为链接。
+
+注释：请始终将正斜杠添加到子文件夹。假如这样书写链接：href="http://www.w3school.com.cn/html"，就会向服务器产生两次 HTTP 请求。这是因为服务器会添加正斜杠到这个地址，然后创建一个新的请求，就像这样：href="http://www.w3school.com.cn/html/"。
+
+name 属性规定锚（anchor）的名称。您可以使用 name 属性创建 HTML 页面中的书签。书签不会以任何特殊方式显示，它对读者是不可见的。当使用命名锚（named anchors）时，我们可以创建直接跳至该命名锚（比如页面中某个小节）的链接，这样使用者就无需不停地滚动页面来寻找他们需要的信息了。
+首先，我们在 HTML 文档中对锚进行命名（创建一个书签）：
+<a name="tips">基本的注意事项 - 有用的提示</a>
+然后，我们在同一个文档中创建指向该锚的链接：
+<a href="#tips">有用的提示</a>
+您也可以在其他页面中创建指向该锚的链接：
+<a href="http://www.w3school.com.cn/html/html_links.asp#tips">有用的提示</a>
+
+alt 属性用来为图像定义一串预备的可替换的文本。替换文本属性的值是用户定义的。
+<img src="boat.gif" alt="Big Boat">
+在浏览器无法载入图像时，替换文本属性告诉读者她们失去的信息。此时，浏览器将显示这个替代性的文本而不是图像。为页面上的图像都加上替换文本属性是个好习惯，这样有助于更好的显示信息，并且对于那些使用纯文本浏览器的人来说是非常有用的。
+
+gif 和 jpg 文件均可用作 HTML 背景。如果图像小于页面，图像会进行重复。
+图像对齐<p>图像 <img src="/i/eg_cute.gif" align="bottom"> 在文本中</p>
+图像大小<img src="/i/eg_mouse.jpg" width="50" height="50">
+
+创建图像映射：有可供点击区域的图像地图。其中的每个区域都是一个超级链接。
+横跨两列的单元格：<th colspan="2">电话</th>
+横跨两行的单元格：<th rowspan="2">电话</th>
+
+frame="above"/"box"/"below"/hsides"/vsides" width="400" border="1" align="left"/"center"/"right" cellpadding="10" 
+cellspacing="10" <caption>我的标题</caption>
+
+表格		描述
+<table>		定义表格
+<caption>	定义表格标题。
+<th>		定义表格的表头。
+<tr>		定义表格的行。
+<td>		定义表格单元。
+<thead>		定义表格的页眉。
+<tbody>		定义表格的主体。
+<tfoot>		定义表格的页脚。
+<col>		定义用于表格列的属性。
+<colgroup>	定义表格列的组。
+
+<ol>	定义有序列表。
+<ul>	定义无序列表。
+<li>	定义列表项。
+<dl>	定义定义列表。
+<dt>	定义定义项目。
+<dd>	定义定义的描述。
+
+<div> 元素可用于对大的内容块设置样式属性。
+<style>
+.cities {
+    background-color:black;
+    color:white;
+    margin:20px;
+    padding:20px;
+} 
+</style>
+<div class="cities">
+HTML <span> 元素是行内元素，能够用作文本的容器。
+设置 <span> 元素的类，能够为相同的 <span> 元素设置相同的样式。
+
+通过使用框架，你可以在同一个浏览器窗口中显示不止一个页面。
+框架结构标签（<frameset>）
+框架结构标签（<frameset>）定义如何将窗口分割为框架
+每个 frameset 定义了一系列行或列
+rows/columns 的值规定了每行或每列占据屏幕的面积
+<frameset cols="25%,75%">
+   <frame src="frame_a.htm">
+   <frame src="frame_b.htm">
+</frameset>
+
+背景（Backgrounds）
+背景颜色属性将背景设置为某种颜色。属性值可以是十六进制数、RGB 值或颜色名。
+<body bgcolor="#000000">
+<body bgcolor="rgb(0,0,0)">
+<body bgcolor="black">
+背景属性将背景设置为图像。属性值为图像的URL。如果图像尺寸小于浏览器窗口，那么图像将在整个浏览器窗口进行复制。
+<body background="clouds.gif">
+<body background="http://www.w3school.com.cn/clouds.gif">
+
+HTML script 元素
+<script> 标签用于定义客户端脚本，比如 JavaScript。
+script 元素既可包含脚本语句，也可通过 src 属性指向外部脚本文件。
+必需的 type 属性规定脚本的 MIME 类型。
+JavaScript 最常用于图片操作、表单验证以及内容动态更新。
+下面的脚本会向浏览器输出“Hello World!”：
+<script type="text/javascript">
+document.write("Hello World!")
+</script>
+
+HTML <meta> 元素
+元数据（metadata）是关于数据的信息。
+<meta> 标签提供关于 HTML 文档的元数据。元数据不会显示在页面上，但是对于机器是可读的。
+典型的情况是，meta 元素被用于规定页面的描述、关键词、文档的作者、最后修改时间以及其他元数据。
+<meta> 标签始终位于 head 元素中。
+元数据可用于浏览器（如何显示内容或重新加载页面），搜索引擎（关键词），或其他 web 服务。
+针对搜索引擎的关键词
+一些搜索引擎会利用 meta 元素的 name 和 content 属性来索引您的页面。
+
+标签	描述
+<head>	定义关于文档的信息。
+<title>	定义文档标题。
+<base>	定义页面上所有链接的默认地址或默认目标。
+<link>	定义文档与外部资源之间的关系。
+<meta>	定义关于 HTML 文档的元数据。
+<script>定义客户端脚本。
+<style>	定义文档的样式信息。
+
+URL - Uniform Resource Locator
+当您点击 HTML 页面中的某个链接时，对应的 <a> 标签指向万维网上的一个地址。
+统一资源定位器（URL）用于定位万维网上的文档（或其他数据）。
+网址，比如 http://www.w3school.com.cn/html/index.asp，遵守以下的语法规则：
+scheme://host.domain:port/path/filename
+解释：
+scheme - 定义因特网服务的类型。最常见的类型是 http
+host - 定义域主机（http 的默认主机是 www）
+domain - 定义因特网域名，比如 w3school.com.cn
+:port - 定义主机上的端口号（http 的默认端口号是 80）
+path - 定义服务器上的路径（如果省略，则文档必须位于网站的根目录中）。
+filename - 定义文档/资源的名称
+
+表单
+文本输入
+<input type="text"> 定义用于文本输入的单行输入字段：
+实例
+<form>
+ First name:<br>
+<input type="text" name="firstname">
+<br>
+ Last name:<br>
+<input type="text" name="lastname">
+</form> 
+
+单选按钮输入
+<input type="radio"> 定义单选按钮。
+单选按钮允许用户在有限数量的选项中选择其中之一：
+实例
+<form>
+<input type="radio" name="sex" value="male" checked>Male
+<br>
+<input type="radio" name="sex" value="female">Female
+</form> 
+
+提交按钮
+<input type="submit"> 定义用于向表单处理程序（form-handler）提交表单的按钮。
+表单处理程序通常是包含用来处理输入数据的脚本的服务器页面。
+表单处理程序在表单的 action 属性中指定：
+实例
+<form action="action_page.php">
+First name:<br>
+<input type="text" name="firstname" value="Mickey">
+<br>
+Last name:<br>
+<input type="text" name="lastname" value="Mouse">
+<br><br>
+<input type="submit" value="Submit">
+</form> 
+
+Name 属性
+如果要正确地被提交，每个输入字段必须设置一个 name 属性。
+本例只会提交 "Last name" 输入字段：
+实例
+<form action="action_page.php">
+First name:<br>
+<input type="text" value="Mickey">
+<br>
+Last name:<br>
+<input type="text" name="lastname" value="Mouse">
+<br><br>
+<input type="submit" value="Submit">
+</form> 
+
+用 <fieldset> 组合表单数据
+<fieldset> 元素组合表单中的相关数据
+<legend> 元素为 <fieldset> 元素定义标题。
+实例
+<form action="action_page.php">
+<fieldset>
+<legend>Personal information:</legend>
+First name:<br>
+<input type="text" name="firstname" value="Mickey">
+<br>
+Last name:<br>
+<input type="text" name="lastname" value="Mouse">
+<br><br>
+<input type="submit" value="Submit"></fieldset>
+</form> 
+
+HTML Form 属性
+HTML <form> 元素，已设置所有可能的属性，是这样的：
+
+实例
+<form action="action_page.php" method="GET" target="_blank" accept-charset="UTF-8"
+ectype="application/x-www-form-urlencoded" autocomplete="off" novalidate>
+.
+form elements
+ .
+</form> 
+下面是 <form> 属性的列表：
+
+属性		描述
+accept-charset	规定在被提交表单中使用的字符集（默认：页面字符集）。
+action		规定向何处提交表单的地址（URL）（提交页面）。
+autocomplete	规定浏览器应该自动完成表单（默认：开启）。
+enctype		规定被提交数据的编码（默认：url-encoded）。
+method		规定在提交表单时所用的 HTTP 方法（默认：GET）。
+name		规定识别表单的名称（对于 DOM 使用：document.forms.name）。
+novalidate	规定浏览器不验证表单。
+target		规定 action 属性中地址的目标（默认：_self）。
+
+<select> 元素（下拉列表）
+<select> 元素定义下拉列表：
+实例
+<select name="cars">
+<option value="volvo">Volvo</option>
+<option value="saab">Saab</option>
+<option value="fiat">Fiat</option>
+<option value="audi">Audi</option>
+</select>
+
+<textarea> 元素
+<textarea> 元素定义多行输入字段（文本域）：
+实例
+<textarea name="message" rows="10" cols="30">
+The cat was playing in the garden.
+</textarea>
+
+HTML5 <datalist> 元素
+<datalist> 元素为 <input> 元素规定预定义选项列表。
+用户会在他们输入数据时看到预定义选项的下拉列表。
+<input> 元素的 list 属性必须引用 <datalist> 元素的 id 属性。
+实例
+通过 <datalist> 设置预定义值的 <input> 元素：
+<form action="action_page.php">
+<input list="browsers">
+<datalist id="browsers">
+   <option value="Internet Explorer">
+   <option value="Firefox">
+   <option value="Chrome">
+   <option value="Opera">
+   <option value="Safari">
+</datalist> 
+</form>
+

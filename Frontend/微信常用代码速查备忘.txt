@@ -1,0 +1,32 @@
+
+width: 128rpx;
+height: 128rpx;
+/*min-height: 67px;*/
+/*min-height设置段落最小高度*/
+
+flex: 1;
+/*让所有弹性盒模型对象的子元素都有相同的长度，且忽略它们内部的内容*/
+
+margin-top: 10px;
+/*会影响audio控件的点击位置*/
+margin-bottom: 10px;
+text-align:center;
+/*margin为外边距*/
+
+/*padding: 5px 35px;*/
+/*内边距：上下边距 & 左右边距*/
+
+/*background-color: rgb(37, 131, 115);*/
+
+display: table-cell;
+vertical-align: middle;
+display: table-cell 作为表格单元格显示，如此一来，
+vertical-align:middle  属性起作用了。去掉display可就不行了哦！！
+
+display: flex;
+flex-direction:row;
+/*flex流式布局，row为水平方向从左开始，row-reverse为相反*/
+
+/*overflow: hidden;*/
+/*如果内容溢出了元素内容区域，是否对内容的边缘进行裁剪*/
+
