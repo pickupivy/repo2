@@ -1,0 +1,8 @@
+
+原命令 >文件名    
+比如：ipconfig /all > H:/fengqing.txt
+说明:">"为覆盖原文件
+
+原命令 >>文件名
+比如：ipconfig /all >> H:/fengqing.txt
+说明:">>"为追加到原文件内容的后面

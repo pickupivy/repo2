@@ -1,0 +1,13 @@
+
+1.设置-->系统-->多任务处理-->贴靠：可以解决贴靠窗口时，另一半自动缩放并显示要缩放的其他窗口。
+
+2.Win10系统怎样让打开图片方式为照片查看器：代开注册表，
+找到：计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations
+接下来就是比较关键的步骤了，如果你想要打开.jpg后缀的文件，那么新建字符串值，数值名称要写为.jpg，数值数据写为“PhotoViewer.FileAssoc.Tiff”，然后点击“确定”按钮。
+接下来，如果你想要使用Windows照片查看器查看.png后缀的文件，那么数值名称写为.png，数值数据还是为PhotoViewer.FileAssoc.Tiff。换句话说，只要你想更改任何格式的图片文件打开方式，那么数值名称就是.格式名称，数值数据一直为PhotoViewer.FileAssoc.Tiff。
+
+3.win10系统打开服务，Superfetch几乎无用且占用资源，应改为手动。
+
+4.打开运行，输入netplwiz回车，就可以修改用户账户的本机账户的名称！以及修改该账户所在的组。
+
+5.打开任务管理器，找到“Cortana（小娜）”进程，在该进程上点击鼠标右键，选择“打开文件所在位置“，其中SearchUI.exe就是Cortana的程序，将其删掉即可让其不启动。
