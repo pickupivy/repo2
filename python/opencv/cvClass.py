@@ -1,6 +1,7 @@
 
 import numpy as np
 import cv2 as cv
+from numpy import pi
 
 class VideoClass():
 	
@@ -76,7 +77,7 @@ class VideoClass():
 
 class DrawClass():
 	
-	def __init__(self, winName, imgName, isCircle):
+	def __init__(self, winName, imgName, isCircle=True):
 		self.winName=winName
 		self.imgName=imgName
 		self.drawing=False	# true if mouse is pressed
@@ -110,13 +111,21 @@ class DrawClass():
 				cv.rectangle(self.imgName,(self.ix,self.iy),(x,y),(0,255,0),1)	#BGR
 	
 	def setCalBckFunc(self):	
-		cv.setMouseCallback(self.winName,self.drawCircle2)
+		#cv.setMouseCallback(self.winName,self.drawCircle2)
 		#(Name of the window, Callback function for mouse events)
+		cv.namedWindow(self.winName)	#setMouseCallback需要已有的窗口
+		cv.setMouseCallback(self.winName,self.getRGB)
 		
 	def print_opencv_events(self):
 		events = [i for i in dir(cv) if 'EVENT' in i]
 		for item in events:
 			print( item )
+	
+	def getRGB(self,event,x,y,flags,param):
+		if event == cv.EVENT_LBUTTONDOWN:
+			self.ix,self.iy = x,y
+			pixel=self.imgName[self.iy, self.ix]	#注意，坐标和行列必须是反过来的！
+			print(pixel)	#BGR
 	
 	def otherfunc(self):
 		# Draw a diagonal blue line with thickness of 5 px
@@ -161,5 +170,53 @@ class TrackBarClass():
 		
 	def getPos(self):
 		cv.getTrackbarPos(self.barName,self.winName)
+
+def prtImgPrpt(image):
+	print(image.shape)
+	print(image.size)
+	print(image.dtype)
+
+
+class CCM():
+
+	def __init__(self,SatU,Hue,oldCCM):
+		#np.set_printoptions(precision=0)
+		self.SatU=SatU
+		self.Hue=Hue/180*pi
+		self.oldCCM=oldCCM
+		self.cosHue=np.cos(self.Hue)
+		self.sinHue=np.sin(self.Hue)
+		# self.SatV=SatV
+		self.SatMat=np.mat([[1,0,0], [0,SatU,0], [0,0,SatU]])
+		self.HueMat=np.mat([[1,0,0], [0,self.cosHue,-self.sinHue], [0,self.sinHue,self.cosHue]])
+		self.YUV2RGB=np.mat([[1.0,0.0,1.0],[0.983,-0.186,-0.525],[1.0,1.0,0.0]])
+		self.RGB2YUV=np.mat([[0.31,0.59,0.11],[-0.31,-0.59,0.89],[0.69,-0.59,-0.11]])
+		self.Adjstep=self.YUV2RGB*self.SatMat*self.HueMat*self.RGB2YUV
+		self.newCCM=self.Adjstep*self.oldCCM
+		# self.newCCM=np.around(self.newCCM)
+		# self.Adjstep=np.around(self.Adjstep)
+		# print(self.YUV2RGB)
+		# print(self.RGB2YUV)
+	
+	def prtSome(self):
+		print(self.newCCM)
+		print(self.Adjstep)
+		
+	def adjPic(self, orgPic):
+		height, width = orgPic.shape[:2]
+		#print(range(0,height))
+		for rol in range(0,height):
+			for col in range(0,width):
+				j=orgPic[rol,col].reshape(3,1)
+				#print(j.shape)
+				newPic=self.Adjstep*j
+				#newPic=newPic.astype(np.uint8)
+				#print(newPic)
+				newPic=newPic.reshape(1,3)
+				#print(newPic)
+				orgPic[rol,col]=newPic
+				#print(orgPic[0,0])
+
+
 
 
