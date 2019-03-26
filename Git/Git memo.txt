@@ -15,6 +15,7 @@ Enter same passphrase again: [Type passphrase again]
 远程仓库添加密钥：网站都有添加SSH key的窗口，需要注意的是这里添加的是公钥id_rsa.pub，将其中的内容复制进网站。
 
 4.测试SSH连接权限是否打开：以github为例，输入：ssh -T git@github.com
+对于瑞晟内部的网站：ssh -T archer_wu@pcbugit.realsil.com.cn但似乎都会遭到拒绝，但是却已经可以正常下载仓库。
 
 连接拒绝情况：
 The authenticity of host 'github.com (IP ADDRESS)' can't be established.

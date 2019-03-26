@@ -1,0 +1,73 @@
+﻿
+GNU Binutils，是 GNU Binary Utilities 的简写，一般简称为 Binutils。中文可以翻译为 GNU 的二进制工具集。
+
+显然，Binutils 是一组二进制工具的集合。也就是说，Binutils不是指某一个工具，而是指一组工具，并且这些工具都是专门针对于二进制的。
+
+注意，这里千万不要理解错了，不是说这些 Binutils工具只提供二进制文件，而是说这些工具的目的是用于操作二进制文件的，而不是针对于文本或者源代码。 
+
+在Linux环境下，这种二进制文件主要指 *.o 文件和 elf 执行文件。显然，编译源代码的是 gcc，所以 Binutils 不包含 gcc（这是一种简单的说法，实际上还是有很多关联的）。
+
+
+
+Binutils 中比较重要的是 ld 和 as。
+
+ld —— 链接器：将多个目标文件，链接成一个可执行文件（或目标库文件）。
+
+as —— 汇编器：将汇编源代码，编译为（目标）机器代码。
+
+
+另外还有下面这些相对次要的，但非常实用的工具：
+
+
+addr2line：将地址转换为（文件名和）行号的工具，一般主要用于反汇编。
+ar：用来操作(.a)档案文件，比如创建，修改，提取内容等
+
+c++filt：Filter to demangle encoded C++ symbols
+
+dlltool：
+Creates files for building and using DLLs
+
+
+gold：
+一个新的，速度更快的，只针对于ELF的链接器（可能还不是很成熟稳定）。
+
+
+gprof：
+Displays profiling information
+
+
+nlmconv：Converts object code into an NLM
+
+
+nm：列出目标文件中的符号
+
+objcopy 
+拷贝并翻译（转换）文件，可用于不同格式的二进制文件的转换。
+
+
+objdump：显示目标文件中的信息。
+
+
+ranlib：
+Generates an index to the contents of an archive
+
+
+readelf：显示 ELF 格式的（目标）文件的信息。
+
+
+size：
+显示目标文件或(.a)档案文件中的节（section）的大小。
+
+
+strings：显示文件中的（可打印）的字符串信息。
+
+
+strip：
+去除符号。一般用来把可执行文件中的一些信息（比如 debug 信息）去除掉，以实现在不影响程序功能的前提下，减少可执行文件的大小，减少程序的空间占用。
+
+
+windmc：A Windows compatible message compiler
+
+
+windres：
+A compiler for Windows resource files
