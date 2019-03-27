@@ -1,0 +1,51 @@
+1. 为root用户设置密码
+
+sudo passwd root
+
+需要先输入一次当前用户的登陆密码，然后输入两次root用户的密码（自己设置）。
+
+
+
+2. 切换至root用户
+
+sudo
+
+3. 编辑登陆配置文件
+
+vi /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+
+
+
+4. 编辑后内容如下（“i”键开始编辑，“Esc”键 - “:wq”保存并退出）
+
+
+[SeatDefaults]
+
+user-session=ubuntu
+
+#autologin-user=root
+#greeter-session=unity-greete
+
+greeter-show-manual-login=true
+
+#allow-guest=false
+
+
+带#为可选
+
+5.进入/etc/pam.d文件夹下，修改gdm-autologin和gdm-passwd文件内容(首先修改文件权限)
+
+
+gdm-autologin文件和gdm-passwd文件均注释掉auth required pam_success_if.so user!=root quiet_success这一行
+
+
+
+6. 如果直接重启还是会出现问题的，“读取/root/.profile时发生错误 mesg:ttyname failed”，修复问题，编辑配置文件
+
+vi /root/.profile
+
+找到.profile文件中的“mesg n”，并将其替换成“tty -s && mesg n”。
+
+
+
+7. 重启ubuntu，就可以登陆root用户了。

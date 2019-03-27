@@ -1,0 +1,14 @@
+
+默认情况下，如果系统只有一个版本的ubuntu，grub菜单是不显示的。
+
+打算显示grub菜单。
+
+步骤如下： 
+
+首先备份/etc/default/grub文件 打开/etc/default/grub文件，找到 GRUB_HIDDEN_TIMEOUT=0 这行，使用#注释掉，变成 #GRUB_HIDDEN_TIMEOUT=0 
+
+找到 GRUB_TIMEOUT=10 把10变成3,意思是等待3秒钟。 
+
+GRUB_TIMEOUT=3 保存后，执行命令 sudo update-grub 现在启动的时候就会显示grub菜单了，如果3秒内不选择，则会自动进入系统。
+
+一定要注意注释掉GRUB_HIDDEN_TIMEOUT，不然修改不起作用。这个东西好像是开机等待时间？

@@ -1,0 +1,21 @@
+
+按CTRL+ALT+F1可以进入图形模式，F2~F6则是进入命令行模式tty2~tty6，这个可能不同的机子不一样。
+
+
+将ubuntu由图形模式启动更改为命令行启动：
+
+如果要每次开机都进入到命令行模式的话，需要在/etc/default/grub里面配置。
+
+将GRUB_CMDLINE_LINUX_DEFAULT一行中"quiet splash"改为"quiet splash 3"
+#将GRUB_CMDLINE_LINUX=""那行，更改为GRUB_CMDLINE_LINUX="text"？这个不行
+
+保存退出后，使用update-grub命令来基于这些更改重新生成/boot下的GRUB2配置文件。
+提示：Warning: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is set is no longer supported.
+再打开/etc/default/grub发现GRUB_TIMEOUT由原来的0变成了10。
+
+重启即可进入命令行模式了。
+
+在grub2界面下按“e”键进入编辑模式：在出现的编辑项里，可以看到GRUB解析给内核的参数。
+我们在该行末尾给出引导运行级别，3（多用户模式，纯文本）
+就是 linux	/boot/vmlinuz-... quiet splash $vt_handoff 然后加个3
+然后按CTRL+X或F10引导系统，启动之后就是命令行模式了。这种方法只是一次临时性的，并不是永久性的，在下一次系统重启后，如果不做修改的话，还是会进入图形界面模式。
