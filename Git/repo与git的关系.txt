@@ -1,0 +1,47 @@
+﻿
+Git作为一个版本控制工具，功能很强大，新建分支，切换分支都很快，小团队用Git就能很好地管理好了，但如果是Android系统如此庞大的工程呢，我们知道全套Android源码是很大很大的，目录结构也很复杂，如果直接将其init成一个Git库，简直是灾难，也不符合解耦的要求。
+
+当你完成了repo init以后，你会在你的目录下发现一个.repo的隐藏目录，进到.repo/manifest/中，打开default.xml，
+这就是之前所说的用来记录一个版本中需要哪些库的文件。
+
+这个manifest目录本身其实也是一个git库，一个Android版本对应一个分支，其中的default.xml就记录着这个版本所需要的库，repo工具再根据这个文件去把取各个库的对应分支并最终组合起来。
+
+总结一下，Git管理单独的模块，而repo管理所有的Git库，将多个Git库组合在一起，形成一个完整的大版本。
+
+git入门----repo的基本认识
+
+1、定义。
+Repo是谷歌用Python脚本写的调用git的一个脚本。主要是用来下载、多个Git仓库。
+而Android项目那是由多个git仓库组成的，它有非常多的分支。
+如:android/framework/base它就是一个git仓库。
+android/packages/apps/Camera（app下面的所有的应用都是单独的git仓库进行的管理）
+这样假如你不用repo进行统一管理的话，就说基本的你下载Android源码，难道要一个个的写每个仓库的url?然后下载完
+单独的配置每个仓库？单独初始化什么的？显然比较麻烦。
+repo 其实就是把相关的git操作命令进行了封装，方便一下操作好几个git仓库.
+
+2、初始化。
+安装下载repo脚本，接下来就是初始化环境下载代码了。
+一般来说为了方便管理，你可以用合适的文件夹名称来存放你要下载的分支代码，然后用在这个文件夹内repo init。
+
+2.1、初始化repo工具脚本，并且从服务器端克隆manifest，这个manifest很关键，repo就是按照它来管理多个git仓库的。
+repo init -u URL  -b branch_name ： 这是最常用的URL就用公司的服务端地址,branch_name：就是你下载的代码的分支的名字，因为公司肯定会同时维护好几个分支的代码用于开发。
+这个命令就相当于对repo配置和repo脚本集进行git pull，但是它还额外做了更多的事情
+命令参数：
+-u：指定一个url然后连接到一个manifest库.这个manifest库里面会有所有分支的manifest文件。
+-b ：选择manifest仓库的一个特殊的分支
+-m :选择manifest仓库中的某一个。当有很多个的时候默认default.xml.
+
+其实，如果不使用repo工具，也是可以对照manifest.xml文件清单直接使用“git clone”的方式一个project一个project的下
+载的，然后对每个project进行git checkout特定的分支。
+
+默认的远程版本库origin，revision代表分支默认的分支，project用于表示一个git项目，也就是git仓库。path：用于表示在工作区的位置，name表示改git仓库的远程相对路径。
+
+3、下载代码
+repo sycn ：按照.repo/manifest.xml指向的那个xml开始克隆并同步远程版本库中的代码.此时两种情况
+1）、如果是第一次克隆本地不存在上面的版本库，那么就相当于git clone.
+2）、如果版本库已经存在相当于
+git remote update  这个命令对于每一个remote的远程分支进行执行了fetch.
+git rebase orignl/branch ：对当前所在的分支执行rebase.
+repo sync -c 是指当前分支。可以加快下载速度。
+也可以克隆某个指定的git仓库，但注意单独克隆的一般没法编译因为它会依赖别的git库或者缺少mk。所以可能编译不成功
+repo sycn  URL. 这个URL就是manifest中指定的name.

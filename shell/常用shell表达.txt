@@ -1,0 +1,26 @@
+#!/bin/sh
+
+echo -n "Enter your name:"   #参数-n的作用是不换行，echo默认是换行
+read  name                   #从键盘输入
+echo "hello $name,welcome to my program"     #显示信息
+exit 0                       #退出shell程序。
+
+#后加注释有换行回车的效果？
+#调用函数的时候直接写函数名，不加括号！
+
+#!/bin/bash
+read -p "pls input a number:" n
+case "$n" in
+    1)
+        echo "变量是1"
+        ;;
+    2)
+        echo "变量是2"
+        ;;
+    3)
+        echo "变量是3"
+        ;;
+    *)
+        echo "pls input a number between 1 and 3"
+        exit;
+esac
