@@ -1,0 +1,52 @@
+
+创建线程函数———pthread_create函数
+#include <pthread.h>
+int pthread_create(pthread_t * thread, const pthread_arrt_t* attr,void*(*start_routine)(void *), void* arg);
+（1）thread参数是新线程的标识符,为一个整型。
+
+（2）attr参数用于设置新线程的属性。给传递NULL表示设置为默认线程属性。
+
+（3）start_routine和arg参数分别指定新线程将运行的函数和参数。start_routine返回时,这个线程就退出了
+
+（4）返回值:成功返回0,失败返回错误号。
+
+
+终止线程———pthread_cancel函数和pthread_exit函数
+终止某个线程而不终止整个进程,可以有三种方法:
+
+1. 从线程函数return。这种方法对主线程不适应,从main函数return相当于调用exit。
+
+2. 一个线程可以调用pthread_cancel终止同一进程中的另一个线程。
+
+3. 线程可以调用pthread_exit终止自己。
+
+#include <pthread.h>
+int pthread_cancel(pthread_t thread);
+（1）thread参数是目标线程的标识符。
+（2）该函数成功返回0，失败返回错误码。
+
+#include <pthread.h>
+void pthread_exit(void * retval);
+
+（1）retval是void *类型,其它线程可以调用pthread_join获得这个指针。
+需要注意,pthread_exit或者return返回的指针所指向的内存单元必须是全局的或者是由malloc分 配的,
+不能在线程函数的栈上分配,因为当其它线程得到这个返回指针时线程函数已经退出了。
+（2）pthread_exit函数通过retval参数向线程的回收者传递其退出信息。它执行之后不会返回到调用者，且永远不会失败。
+
+线程等待———pthread_join
+#include <pthread.h>
+void pthread_join(pthread_t thread,void ** retval);
+
+（1）调用该函数的线程将挂起等待,直到id为thread的线程终止。
+
+（2）thread线程以不同的方法终止,通过pthread_join得到的终止状态是不同的,
+
+总结如下:
+
+1. 如果thread线程通过return返回,value_ptr所指向的单元里存放的是thread线程函数的返回值。
+
+2. 如果thread线程被别的线程调用pthread_cancel异常终掉,value_ptr所指向的单元里存放的是常数PTHREAD_CANCELED。
+
+3. 如果thread线程是自己调用pthread_exit终止的,value_ptr所指向的单元存放的是传给pthread_exit的参数。 如果对thread线程的终止状态不感兴趣,可以传NULL给value_ptr参数。
+
+（3）成功返回0，失败返回错误码。

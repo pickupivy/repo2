@@ -1,0 +1,34 @@
+
+设置
+1.添加nomodeset
+
+
+
+软件
+安装方法：最好使用ubuntu商店
+安装Nvidia驱动，不然眼睛都快亮辖了
+使用标准Ubuntu 仓库进行自动化安装
+这种方法几乎是所有的示例中最简单的方法，也是该教程最为推荐的方法。首先，检测你的NVIDIA显卡型号和推荐的驱动程序的模型。在命令行中输入如下命令：
+
+$ ubuntu-drivers devices
+== /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
+modalias : pci:v000010DEd00001180sv00001458sd0000353Cbc03sc00i00
+vendor   : NVIDIA Corporation
+model    : GK104 [GeForce GTX 680]
+driver   : nvidia-304 - distro non-free
+driver   : nvidia-340 - distro non-free
+driver   : nvidia-384 - distro non-free recommended
+driver   : xserver-xorg-video-nouveau - distro free builtin
+
+从输出结果可以看到，目前系统已连接Nvidia GeFrand GTX 680显卡，建议安装驱动程序是 nvidia-384版本的驱动。如果您同意该建议，请再次使用Ubuntu驱动程序命令来安装所有推荐的驱动程序。
+
+！！注意，要把之前设置的nomodeset取消掉，否则又会起不来。
+
+输入以下命令：
+
+$ sudo ubuntu-drivers autoinstall
+
+
+
+1.浏览器：Chrome
+2.文档编辑器：

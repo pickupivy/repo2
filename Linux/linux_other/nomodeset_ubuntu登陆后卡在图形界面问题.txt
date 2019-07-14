@@ -1,0 +1,14 @@
+
+在etc/default/grub里，将 nomodeset 添加到 GRUB_CMDLINE_LINUX_DEFAULT:
+
+GRUB_DEFAULT=0
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2>/dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nomodeset"
+GRUB_CMDLINE_LINUX=""
+
+然后点击Ctrl+O保存，然后用Ctrl+X退出，然后简单地运行：
+
+update-grub
