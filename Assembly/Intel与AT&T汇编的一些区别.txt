@@ -1,0 +1,109 @@
+Intel与AT&T汇编的一些区别
+在Intel与AT&T语法当中一些主要的区别就是：
+
+操作数写在后面
+
+在Intel语法中：\ \ \
+
+在AT&T语法中：\ \ \
+
+有一个简单的记住它们的方法: 当你面对intel语法的时候，你可以想象把等号
+
+(=)放到2个操作数中间，当面对AT&T语法的时候，你可以放一个右箭头(→）
+
+到两个操作数之间。
+
+AT&T: 在寄存器名之前需要写一个百分号(%)并且在数字前面需要加上美元符
+
+($)。并用圆括号替代方括号。
+
+AT&T: 以下是一些添加到操作符后，用来表示数据形式的后缀：
+
+– q — quad (64 bits)
+
+– l — long (32 bits)
+
+– w — word (16 bits)
+
+– b — byte (8 bits)
+
+目录	
+1. 指令大小写
+2. 指令操作数赋值方向
+3. 指令前缀
+4. 间接寻址语法
+5. 指令后缀
+6. 指令
+1. 指令大小写
+INTEL 格式的指令使用大写字母,而 AT&T 格式的使用小写字母。例:
+
+MOV EAX, EBX ;INTEL
+movl %ebx, %eax //AT&T
+
+2. 指令操作数赋值方向
+在 INTEL 语法中,第一个表示目的操作数,第二个表示源操作数,赋值方向从右向左。AT&T 语法第一个为源操作数,第二个为目的操作数,方向从左到右,合乎自然。例:
+
+MOV EAX,EBX ;INTEL
+movl %ebx,%eax //AT&T
+
+3. 指令前缀
+在 INTEL 语法中寄存器和立即数不需要前缀;AT&T 中寄存器需要加前缀“%”;立即
+数需要加前缀“$”。例:
+
+MOV EAX,1 ;INTEL
+movl $1,%eax //AT&T
+
+符号常数直接引用,不需要加前缀,如:
+
+movl value , %ebx //value 为一常数;
+
+在符号前加前缀 $, 表示引用符号地址, 如:
+
+movl $value, %ebx //将 value 的地址放到 ebx 中。
+
+总线锁定前缀“lock”:总线锁定操作。“lock”前缀在 Linux 核心代码中使用很多,特
+别是 SMP 代码中。当总线锁定后其它 CPU 不能存取锁定地址处的内存单元。远程跳转指令和子过程调用指令的操作码使用前缀“l“,分别为 ljmp,lcall,与之相应的返回指令伪 lret。
+
+例:
+
+INTEL:
+JMP FAR SECTION:OFFSET
+RET FAR SATCK_ADJUST
+
+AT&T:
+lcall $secion,$offset
+ljmp $secion,$offset
+lret $stack_adjust
+
+4. 间接寻址语法
+INTEL 中基地址使用“[”、“]”,而在 AT&T 中使用“(”、“)”;另外处理复杂操作数的语 法 也 不 同 , INTEL 为 Segreg:[base+index*scale+disp] , 而 在 AT&T 中 为 %segreg:disp(base,index,sale),其中 segreg,index,scale,disp 都是可选的,在指定 index 而没有显式指定 Scale 的情况下使用默认值 1。Scale,disp 不需要加前缀“&”。
+
+Instr foo,segreg:[base+index*scale+disp] ;INTEL
+instr %segreg:disp(base,index,scale),foo //AT&T
+
+5. 指令后缀
+AT&T 语法中大部分指令操作码的最后一个字母表示操作数大小,“b”表示 byte(一个字节);“w”表示 word(2,个字节);“l”表示 long(4,个字节)。INTEL 中处理内存操作数时也有类似的语法如:BYTE PTR、WORD PTR、DWORD PTR。例:
+
+INTEL:
+mov al, bl
+mov ax,bx
+mov eax, dword ptr [ebx]
+
+AT&T:
+movb %bl,%al
+movw %bx,%ax
+movl (%ebx), %eax
+
+AT&T 汇编指令中,操作数扩展指令有两个后缀,一个指定源操作数的字长,另一个指定目标操作数的字长。AT&T 的符号扩展指令为“movs”,零扩展指令为“movz”(相应的Intel 指令为“movsx”和“movzx”)。因此,“movsbl %al,%edx”表示对寄存器 al 中的字节数据进行字节到长字的符号扩展,计算结果存放在寄存器 edx 中。下面是一些允许的操作数扩展后缀:
+
+bl: 字节>->长字
+bw: 字节>->字
+wl: 字->长字
+
+跳转指令标号后的后缀表示跳转方向,“f”表示向前(forward),“b”表示向后(back)。例:
+
+jmp 1f
+jmp 1b
+
+6. 指令
+INTEL 汇编与 AT&T 汇编指令基本相同,差别仅在语法上。关于每条指令的语法可以参考 I386Manual。
