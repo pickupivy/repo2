@@ -7,4 +7,9 @@ void a() //定义a函数
 	}
 }，这是不对的，
 
-2.
+2.汇编程序中以"."开头的名称不是指令的助记符，不会被翻译成机器指令，而是给汇编器一些特殊的指示，称为汇编指示或伪操作。
+
+终止处理函数(exit handler) int atexit(void (*func)(void));
+进程有5种正常终止和3种异常终止的方式：
+main return; 调用exit(); 调用_exit(); 线程return; pthread_exit();
+调用abort(); 信号；最后一个线程对cancellation做出回应。
