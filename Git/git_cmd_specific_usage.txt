@@ -1,0 +1,45 @@
+
+git log --follow
+	Continue listing the history of a file beyond renames (works only for a single file).
+显示一个文件的改动历史，包含该文件的内容改动、文件名改动。若搜索的是一个文件的曾用名，则只会显示曾用名之前的历史。
+例如： C1(add a1.txt, 内容："a123")->C2(a1.txt内容:"a123"->"a456")->C3(renames: a1.txt->b2.txt)->
+	C4(b2.txt内容："a456"->"b789")->C5(renames: b2.txt->c3.txt)->C6(c3.txt内容："b789"->"ccccc")
+那么
+$ git log --follow a1.txt	可以搜出C1, C2, C3
+$ git log --follow b2.txt	可以搜出C1, C2, C3, C4, C5
+$ git log --follow c3.txt	可以搜出C1~C6所有commit
+
+总之，可以搜索一个指定名字的文件的所有历史版本，包括其曾用名版本，但不包括之后改名的版本。
+
+
+git log --log-size
+	Include a line “log size <number>” in the output for each commit, where <number> is the length of that commit’s message in bytes. Intended to speed up tools that read log messages from git log output by allowing them to allocate space in advance.
+显示log时，增加显示每个commit的log信息大小(即占用多少字节的空间)，用于一些工具提前分配空间加快读取的，平常用不到。
+
+
+git log  --author=<pattern>
+git log --committer=<pattern>
+//示例
+$ git log --author=“小明”
+$ git log --author=“小明\|小红”
+
+
+git log --oneline	只显示提交的 SHA1 值和提交信息，SHA1 还是缩短显示前几位。
+
+
+git log --stat[=<width>[,<name-width>[,<count>]]]
+	Generate a diffstat. By default, as much space as necessary will be used for the filename part, and the rest for the graph part. 
+--stat会显示每个commit的文件改动信息，width为总显示宽度，默认80；name-width为文件名显示宽度；count为每个commit最多显示多少行，默认全部。
+
+
+任意分支切换：
+git checkout <SHA值前几位> 可以切换到该分支，一般前6位即可。
+git checkout <tag名称> 可以切换到tag所在的commit
+git checkout -b <新分支名> <tag名称> 可以切换到tag所在的commit并创建分支
+git checkout -b <新分支名> <SHA40位> 可以切换到指定的commit并创建分支，SHA值必须要写全！
+寻找版本的方法应为从较新版本往历史版本回溯，而不能从老版本往新版本search。
+所谓master就是较新或最新的节点，而新的里程碑节点都是会加branch或者tag的。
+
+
+git tag --contains 显示当前commit所包含的tag。
+
