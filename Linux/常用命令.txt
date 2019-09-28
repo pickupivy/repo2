@@ -78,4 +78,8 @@ mkdir -pv /mnt/sysroot/{etc/rc.d,usr,var,proc,sys,dev,lib,lib64,bin,sbin,boot,sr
 
 程序
 # rpm -qa                # 查看所有安装的软件包
+# which			#在PATH变量里寻找可执行文件的路径
+
+
+chmod -R 700 Document/	-R参数是递归 处理目录下的所有文件以及子文件夹
 
